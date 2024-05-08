@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/08 12:54:21 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/08 13:51:16 by juramos          ###   ########.fr       */
+/*   Created: 2024/05/08 13:41:32 by juramos           #+#    #+#             */
+/*   Updated: 2024/05/08 13:44:39 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+int	print_error(char *str)
 {
-	if (argc != 5 && argc != 6)
-		return (print_error("Wrong number of arguments\n"));
-	(void) argv;
+	int	i;
+
+	i = 0;
+	write(2, "philo: ", 7);
+	while (str[i])
+		write(2, &str[i++], 1);
+	return (1);
 }

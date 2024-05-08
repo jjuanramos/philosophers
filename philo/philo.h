@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/08 13:01:19 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/08 13:43:50 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,11 @@
 # define PHILO_H
 
 # include <stdio.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
+
+/*	error	*/
+int	print_error(char *str);
 
 #endif
