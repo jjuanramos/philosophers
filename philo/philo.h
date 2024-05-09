@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/09 10:44:45 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/09 13:32:19 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 # define PHILO_H
 
 # include <stdio.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
-
-/*	error	*/
-int	print_error(char *str);
 
 typedef struct s_rules
 {
@@ -29,5 +27,13 @@ typedef struct s_rules
 	int	time_to_sleep;
 	int	meals_needed;
 }				t_rules;
+
+/*	error	*/
+int		print_error(char *str);
+/*	init	*/
+int		init_all(t_rules *rules, char **argv);
+/*	utils	*/
+int		ft_atoi(const char *str);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif

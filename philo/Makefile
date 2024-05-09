@@ -6,7 +6,7 @@
 #    By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 12:55:30 by juramos           #+#    #+#              #
-#    Updated: 2024/05/08 13:44:01 by juramos          ###   ########.fr        #
+#    Updated: 2024/05/09 13:18:07 by juramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,7 @@ CC 			= 	gcc
 CFLAGS 		= 	-Wall -Werror -Wextra -g3 -fsanitize=address
 
 # Sources
-SRC_FILES 	= 	main\
-				error
+SRC_FILES 	= 	main error utils init
 				
 SRC 		=	$(addsuffix .c, $(SRC_FILES))
 
