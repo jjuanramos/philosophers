@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/09 14:03:43 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/16 18:09:16 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 typedef struct s_philo
 {
-	int	nb;
-	int	last_meal;
-	int	n_meals;
+	int			nb;
+	long long	last_meal;
+	int			n_meals;
 }				t_philo;
 
 typedef struct s_rules
@@ -37,13 +37,13 @@ typedef struct s_rules
 }				t_rules;
 
 /*	error	*/
-int		print_error(char *str);
+int			print_error(char *str);
 /*	init	*/
-int		init_all(t_rules *rules, char **argv);
+int			init_all(t_rules *rules, char **argv);
 /*	time	*/
-int		current_timestamp(void);
+long long	current_timestamp(void);
 /*	utils	*/
-int		ft_atoi(const char *str);
-void	*ft_calloc(size_t count, size_t size);
+int			ft_atoi(const char *str);
+void		*ft_calloc(size_t count, size_t size);
 
 #endif

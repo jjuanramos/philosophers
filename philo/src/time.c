@@ -6,16 +6,16 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:00:13 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/09 14:03:12 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/16 18:09:40 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	current_timestamp(void)
+long long	current_timestamp(void)
 {
 	struct timeval	current_time;
-	long			ms;
+	long long		ms;
 
 	gettimeofday(&current_time, NULL);
 	ms = current_time.tv_sec * 1000 + current_time.tv_usec / 1000;
