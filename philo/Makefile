@@ -6,7 +6,7 @@
 #    By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 12:55:30 by juramos           #+#    #+#              #
-#    Updated: 2024/05/09 14:04:27 by juramos          ###   ########.fr        #
+#    Updated: 2024/05/16 17:34:29 by juramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,18 @@ CC 			= 	gcc
 CFLAGS 		= 	-Wall -Werror -Wextra -g3 -fsanitize=address
 
 # Sources
+SRC_DIR 	= 	src/
 SRC_FILES 	= 	main error utils init time
 				
-SRC 		=	$(addsuffix .c, $(SRC_FILES))
+SRC 		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 
 # Objects
 OBJ_DIR 	= 	obj/
 OBJ_DIRS	=	$(sort $(dir $(OBJ)))
 OBJ 		=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+
+# Includes
+INC_MS		= -I includes/
 
 # Colors
 DEF_COLOR 	= 	\033[0;39m
@@ -47,8 +51,9 @@ MAKEFLAGS 	+=	--no-print-directory
 
 all: $(NAME)
 
-$(OBJ_DIR)%.o: %.c | $(OBJF)
-	@$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
+	@echo "\033[0;33mCompiling ${notdir $<}			in	$(SRC_DIR)"
+	@$(CC) $(CFLAGS) $(INC_MS) -c $< -o $@
 
 $(OBJF):
 	@mkdir -p $(OBJ_DIR)
