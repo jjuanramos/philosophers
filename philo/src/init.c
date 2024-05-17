@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/17 11:44:38 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/17 14:32:44 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	init_all(t_rules *rules, char **argv)
 		rules->meals_needed = ft_atoi(argv[5]);
 	else
 		rules->meals_needed = -1;
-	if (!rules->nb_philo || !rules->time_to_die
-		|| !rules->time_to_eat || !rules->time_to_sleep)
-		return (print_error(rules, "Error with initiation of philo's args\n"));
+	if (rules->nb_philo < 1 || rules->time_to_die < 0
+		|| rules->time_to_eat < 0 || rules->time_to_sleep < 0)
+		return (print_error(rules, "Init. error: philo's args\n"));
 	if (init_philos(rules))
-		return (print_error(rules, "Error at philos calloc\n"));
+		return (print_error(rules, "Init. error: rules->philo's calloc\n"));
 	return (EXIT_SUCCESS);
 }
