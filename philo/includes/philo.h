@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/17 14:51:53 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/17 17:01:36 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_rules
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		meals_needed;
-	t_philo	*philos;
+	t_philo	**philos;
 }				t_rules;
 
 /*	error			*/

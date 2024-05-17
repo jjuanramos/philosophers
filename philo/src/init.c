@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/17 14:52:08 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/17 17:03:27 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ int	init_philos(t_rules *rules)
 {
 	int	i;
 
-	rules->philos = malloc(rules->nb_philo * sizeof(t_philo));
+	rules->philos = malloc(rules->nb_philo * sizeof(t_philo *));
 	if (!rules->philos)
 		return (EXIT_FAILURE);
 	i = 0;
 	while (i < rules->nb_philo)
 	{
-		rules->philos[i].nb = i + 1;
-		rules->philos[i].n_meals = 0;
-		rules->philos[i].last_meal = current_timestamp();
+		rules->philos[i] = malloc(2 * sizeof(t_philo));
+		rules->philos[i]->nb = i + 1;
+		rules->philos[i]->n_meals = 0;
+		rules->philos[i]->last_meal = current_timestamp();
 		i++;
 	}
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:41:32 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/17 14:51:38 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/17 17:06:11 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 
 void	rules_cleaner(t_rules *rules)
 {
+	int	i;
+
 	if (rules)
 	{
 		if (rules->philos)
+		{
+			i = 0;
+			while (i < rules->nb_philo)
+				free(rules->philos[i++]);
 			free(rules->philos);
+		}
 	}
 }
 
