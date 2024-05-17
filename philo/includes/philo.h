@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/17 11:46:30 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/17 14:51:53 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,18 @@ typedef struct s_rules
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		meals_needed;
-	t_philo	**philos;
+	t_philo	*philos;
 }				t_rules;
 
 /*	error			*/
 void		rules_cleaner(t_rules *rules);
-int			print_error(t_rules *rules, char *str);
+int			print_error(t_rules *rules, char *str, int to_free);
 /*	init			*/
 int			init_all(t_rules *rules, char **argv);
 /*	time			*/
 long long	current_timestamp(void);
 /*	utils			*/
 int			ft_atoi(const char *str);
-void		*ft_calloc(size_t count, size_t size);
 
 /*	launch_threads	*/
 int			launch_threads(t_rules *rules);

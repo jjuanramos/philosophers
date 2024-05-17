@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:54:21 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/17 11:50:02 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/17 14:35:45 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 int	main(int argc, char **argv)
 {
-	t_rules	*rules;
+	t_rules	rules;
 
 	if (argc != 5 && argc != 6)
 		return (print_error(NULL, "Wrong number of arguments\n"));
-	rules = ft_calloc(1, sizeof(t_rules));
-	if (init_all(rules, argv))
+	if (init_all(&rules, argv))
 		return (EXIT_FAILURE);
-	if (launch_threads(rules))
+	if (launch_threads(&rules))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
