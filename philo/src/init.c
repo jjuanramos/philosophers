@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/17 10:18:45 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/17 11:44:38 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int	init_philos(t_rules *rules)
 {
 	int	i;
 
+	rules->philos = ft_calloc(rules->nb_philo + 1, sizeof(t_philo *));
 	if (!rules->philos)
-		return (1);
+		return (EXIT_FAILURE);
 	i = 0;
 	while (i < rules->nb_philo)
 	{
@@ -42,13 +43,10 @@ int	init_all(t_rules *rules, char **argv)
 		rules->meals_needed = ft_atoi(argv[5]);
 	else
 		rules->meals_needed = -1;
-	rules->philos = ft_calloc(rules->nb_philo + 1, sizeof(t_philo *));
 	if (!rules->nb_philo || !rules->time_to_die
-		|| !rules->time_to_eat || !rules->time_to_sleep
-		|| !rules->philos || init_philos(rules))
-	{
-		free(rules);
-		return (1);
-	}
-	return (0);
+		|| !rules->time_to_eat || !rules->time_to_sleep)
+		return (print_error(rules, "Error with initiation of philo's args\n"));
+	if (init_philos(rules))
+		return (print_error(rules, "Error at philos calloc\n"));
+	return (EXIT_SUCCESS);
 }
