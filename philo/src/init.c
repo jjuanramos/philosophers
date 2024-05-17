@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/16 18:14:38 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/17 10:18:45 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,12 @@ int	init_philos(t_rules *rules)
 	i = 0;
 	while (i < rules->nb_philo)
 	{
-		rules->philos[i] = ft_calloc(2, sizeof(t_philo *));
+		rules->philos[i] = ft_calloc(2, sizeof(t_philo));
 		if (!rules->philos[i])
 			return (EXIT_FAILURE);
 		rules->philos[i]->nb = i + 1;
-		printf("nb is %d at %d\n", rules->philos[i]->nb, i);
 		rules->philos[i]->n_meals = 0;
-		printf("nb is %d\n", rules->philos[i]->n_meals);
 		rules->philos[i]->last_meal = current_timestamp();
-		printf("current timestamp is %lld\n", rules->philos[i]->last_meal);
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -45,7 +42,7 @@ int	init_all(t_rules *rules, char **argv)
 		rules->meals_needed = ft_atoi(argv[5]);
 	else
 		rules->meals_needed = -1;
-	rules->philos = ft_calloc(rules->nb_philo + 1, sizeof(t_philo **));
+	rules->philos = ft_calloc(rules->nb_philo + 1, sizeof(t_philo *));
 	if (!rules->nb_philo || !rules->time_to_die
 		|| !rules->time_to_eat || !rules->time_to_sleep
 		|| !rules->philos || init_philos(rules))
