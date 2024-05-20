@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/20 19:42:12 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/20 19:44:46 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,10 @@ static int	init_philos(t_rules *rules)
 			rules->philos[i]->rf_id = rules->nb_philo;
 			rules->philos[i]->lf_id = 1;
 		}
-		else if (i == rules->nb_philo - 1)
-		{
-			rules->philos[i]->rf_id = rules->nb_philo - 1;
-			rules->philos[i]->lf_id = 1;
-		}
 		else
 		{
-			rules->philos[i]->rf_id = i - 1;
-			rules->philos[i]->lf_id = i + 1;
+			rules->philos[i]->rf_id = rules->nb_philo - 1;
+			rules->philos[i]->lf_id = (i + 1) % rules->nb_philo;
 		}
 		i++;
 	}
