@@ -6,7 +6,7 @@
 #    By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 12:55:30 by juramos           #+#    #+#              #
-#    Updated: 2024/05/20 19:32:56 by juramos          ###   ########.fr        #
+#    Updated: 2024/05/20 19:58:25 by juramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS 		= 	-Wall -Werror -Wextra -g3 -fsanitize=address
 
 # Sources
 SRC_DIR 	= 	src/
-SRC_FILES 	= 	main error utils init time launch_threads
+SRC_FILES 	= 	main utils init time launch_threads
 				
 SRC 		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 
