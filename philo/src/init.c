@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/20 19:37:45 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/20 19:42:12 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ static int	init_philos(t_rules *rules)
 {
 	int	i;
 
-	rules->philos = malloc(rules->nb_philo * sizeof(t_philo *));
-	if (!rules->philos)
-		return (EXIT_FAILURE);
 	i = 0;
 	while (i < rules->nb_philo)
 	{
@@ -31,13 +28,13 @@ static int	init_philos(t_rules *rules)
 		rules->philos[i]->rules = rules;
 		if (!i)
 		{
-			rules->philos[i]->rf_id = rules->nb_philo - 1;
+			rules->philos[i]->rf_id = rules->nb_philo;
 			rules->philos[i]->lf_id = 1;
 		}
 		else if (i == rules->nb_philo - 1)
 		{
-			rules->philos[i]->rf_id = rules->nb_philo - 2;
-			rules->philos[i]->lf_id = 0;
+			rules->philos[i]->rf_id = rules->nb_philo - 1;
+			rules->philos[i]->lf_id = 1;
 		}
 		else
 		{
@@ -86,6 +83,9 @@ int	init_all(t_rules *rules, char **argv)
 	}
 	else
 		rules->meals_needed = -1;
+	rules->philos = malloc(rules->nb_philo * sizeof(t_philo *));
+	if (!rules->philos)
+		return (EXIT_FAILURE);
 	if (init_philos(rules))
 		return (print_error(rules, "Init. error: rules->philo's alloc\n", 1));
 	if (init_mutex(rules))
