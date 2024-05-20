@@ -6,7 +6,7 @@
 #    By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 12:55:30 by juramos           #+#    #+#              #
-#    Updated: 2024/05/17 11:34:10 by juramos          ###   ########.fr        #
+#    Updated: 2024/05/20 19:32:56 by juramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ fclean: clean
 	@echo "$(CYAN)philo executable files cleaned!$(DEF_COLOR)"
 
 re: fclean all
-	@echo "$(GREEN)Cleaned and rebuilt everything for minishell!$(DEF_COLOR)"
+	@echo "$(GREEN)Cleaned and rebuilt everything for philo!$(DEF_COLOR)"
 
 norm:
 	@norminette | grep -v Norme -B1 || true
