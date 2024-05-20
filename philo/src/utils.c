@@ -6,34 +6,20 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:16:30 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/17 14:41:58 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/20 19:25:31 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-int	ft_isspace(int c)
-{
-	if (c == ' ' || c == '\n'
-		|| c == '\f' || c == '\r'
-		|| c == '\t' || c == '\v')
-		return (1);
-	return (0);
-}
 
 static const char	*remove_whitespaces(const char *str)
 {
 	int	pos;
 
 	pos = 0;
-	while (ft_isspace(str[pos]))
+	while (str[pos] == ' ' || str[pos] == '\n'
+		|| str[pos] == '\f' || str[pos] == '\r'
+		|| str[pos] == '\t' || str[pos] == '\v')
 		pos++;
 	return (&str[pos]);
 }
@@ -57,7 +43,7 @@ int	ft_atoi(const char *str)
 	}
 	while (str[pos] != '\0')
 	{
-		if (ft_isdigit(str[pos]))
+		if (str[pos] >= '0' && str[pos] <= '9')
 			num = num * 10 + str[pos] - 48;
 		else
 			return (num * sign);
