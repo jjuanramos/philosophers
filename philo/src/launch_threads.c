@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 11:50:17 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 12:00:48 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	philo_eats(t_philo *phi, t_rules *rules)
 	print_action(phi, "has taken a fork");
 	pthread_mutex_lock(&(rules->forks[phi->rf_id]));
 	print_action(phi, "has taken a fork");
-	print_action(phi, "is eating");
-	philo_sleeps(rules->time_to_eat);
 	pthread_mutex_lock(&(rules->meal_check));
+	print_action(phi, "is eating");
 	phi->last_meal = timestamp();
-	(phi->n_meals)++;
 	pthread_mutex_unlock(&(rules->meal_check));
+	philo_sleeps(rules->time_to_eat);
+	(phi->n_meals)++;
 	pthread_mutex_unlock(&(rules->forks[phi->lf_id]));
 	pthread_mutex_unlock(&(rules->forks[phi->rf_id]));
 }
@@ -47,10 +47,6 @@ void	*p_thread(void *philo)
 	return (NULL);
 }
 
-/*
-	This loop is wrong as we are only checking whether the first
-	philo is dead.
-*/
 void	check_if_dead(t_rules *r, t_philo **p)
 {
 	int		i;
@@ -86,12 +82,12 @@ int	join_and_exit(t_rules *rules)
 
 	i = -1;
 	while (++i)
-	{
 		if (pthread_join(rules->philos[i]->thread_id, NULL))
 			return (EXIT_FAILURE);
+	i = -1;
+	while (++i)
 		if (pthread_mutex_destroy(&(rules->forks[i])))
 			return (EXIT_FAILURE);
-	}
 	if (pthread_mutex_destroy(&(rules->logger)))
 		return (EXIT_FAILURE);
 	if (pthread_mutex_destroy(&(rules->meal_check)))
