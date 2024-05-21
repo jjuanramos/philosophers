@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 13:05:02 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 13:21:16 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	*p_thread(void *philo)
 
 	phi = (t_philo *)philo;
 	rules = phi->rules;
+	if (phi->id % 2)
+		usleep(10000);
 	while (!rules->dead)
 	{
 		philo_eats(phi, rules);
