@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 12:04:36 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 13:03:03 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,12 @@ int	join_and_exit(t_rules *rules)
 
 	i = -1;
 	while (++i)
-		if (pthread_join(rules->philos[i]->thread_id, NULL))
-			return (EXIT_FAILURE);
+		pthread_join(rules->philos[i]->thread_id, NULL);
 	i = -1;
 	while (++i)
-		if (pthread_mutex_destroy(&(rules->forks[i])))
-			return (EXIT_FAILURE);
-	if (pthread_mutex_destroy(&(rules->logger)))
-		return (EXIT_FAILURE);
-	// if (pthread_mutex_destroy(&(rules->meal_check)))
-	// 	return (EXIT_FAILURE);
+		pthread_mutex_destroy(&(rules->forks[i]));
+	pthread_mutex_destroy(&(rules->logger));
+	pthread_mutex_destroy(&(rules->meal_check));
 	return (EXIT_SUCCESS);
 }
 
