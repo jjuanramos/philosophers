@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 11:34:20 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:50:17 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	philo_eats(t_philo *phi, t_rules *rules)
 	print_action(phi, "is eating");
 	philo_sleeps(rules->time_to_eat);
 	pthread_mutex_lock(&(rules->meal_check));
-	phi->last_meal = current_timestamp();
+	phi->last_meal = timestamp();
 	(phi->n_meals)++;
 	pthread_mutex_unlock(&(rules->meal_check));
 	pthread_mutex_unlock(&(rules->forks[phi->lf_id]));
@@ -51,33 +51,32 @@ void	*p_thread(void *philo)
 	This loop is wrong as we are only checking whether the first
 	philo is dead.
 */
-void	check_if_dead(t_rules *rules)
+void	check_if_dead(t_rules *r, t_philo **p)
 {
-	t_philo	*phi;
 	int		i;
 
-	i = 0;
-	while (!(rules->all_ate))
+	while (!(r->all_ate))
 	{
-		phi = rules->philos[i];
-		if (time_diff(phi->last_meal, current_timestamp()) > rules->time_to_die)
+		i = -1;
+		while (++i < r->nb_philo && !(r->dead))
 		{
-			print_action(phi, "died");
-			rules->dead = 1;
+			pthread_mutex_lock(&(r->meal_check));
+			if (time_diff(p[i]->last_meal, timestamp()) > r->time_to_die)
+			{
+				print_action(p[i], "died");
+				r->dead = 1;
+			}
+			pthread_mutex_unlock(&(r->meal_check));
+			usleep(100);
 		}
-		if (rules->dead)
+		if (r->dead)
 			break ;
-		if (rules->meals_needed != 1)
-		{
-			i = 0;
-			while (i < rules->nb_philo
-				&& rules->philos[i]->n_meals >= rules->meals_needed)
-				i++;
-			if (i == rules->nb_philo)
-				rules->all_ate = 1;
-		}
-		else
+		i = 0;
+		while (r->meals_needed != -1
+			&& i < r->nb_philo && p[i]->n_meals >= r->meals_needed)
 			i++;
+		if (i == r->nb_philo)
+			r->all_ate = 1;
 	}
 }
 
@@ -105,15 +104,15 @@ int	launch_threads(t_rules *rules)
 	int	i;
 
 	i = -1;
-	rules->starting_time = current_timestamp();
+	rules->starting_time = timestamp();
 	while (++i < rules->nb_philo)
 	{
 		if (pthread_create(&(rules->philos[i]->thread_id),
 				NULL, p_thread, rules->philos[i]))
 			return (EXIT_FAILURE);
 	}
-	check_if_dead(rules);
+	check_if_dead(rules, rules->philos);
 	join_and_exit(rules);
-	rules_cleaner(rules);
+	// rules_cleaner(rules);
 	return (EXIT_SUCCESS);
 }
