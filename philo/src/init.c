@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 11:23:52 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 12:59:06 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	init_philos(t_rules *rules)
 			rules->philos[i]->lf_id = (i + 1) % rules->nb_philo;
 		i++;
 	}
+	rules->philos[i] = NULL;
 	return (EXIT_SUCCESS);
 }
 
@@ -78,7 +79,7 @@ int	init_all(t_rules *rules, char **argv)
 	}
 	else
 		rules->meals_needed = -1;
-	rules->philos = malloc(rules->nb_philo * sizeof(t_philo *));
+	rules->philos = malloc((rules->nb_philo + 1) * sizeof(t_philo *));
 	if (!rules->philos)
 		return (EXIT_FAILURE);
 	if (init_philos(rules))
