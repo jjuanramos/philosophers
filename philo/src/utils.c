@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:16:30 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 13:00:07 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:41:20 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ int	ft_atoi(const char *str)
 
 void	print_action(t_philo *phi, char *action)
 {
-	pthread_mutex_lock(&(phi->rules->logger));
-	printf("%lli %d %s\n", timestamp(), phi->id, action);
-	pthread_mutex_unlock(&(phi->rules->logger));
+	if (phi->id > 0 && phi->id < phi->rules->nb_philo)
+	{
+		pthread_mutex_lock(&(phi->rules->logger));
+		printf("%lli %d %s\n", timestamp(), phi->id, action);
+		pthread_mutex_unlock(&(phi->rules->logger));
+	}
 }
