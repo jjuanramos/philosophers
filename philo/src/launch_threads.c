@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 13:03:03 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 13:05:02 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	launch_threads(t_rules *rules)
 		if (pthread_create(&(rules->philos[i]->thread_id),
 				NULL, p_thread, rules->philos[i]))
 			return (EXIT_FAILURE);
+		rules->philos[i]->last_meal = timestamp();
 	}
 	check_if_dead(rules, rules->philos);
 	join_and_exit(rules);
