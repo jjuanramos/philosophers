@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 11:16:36 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:32:07 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,11 @@ int	launch_threads(t_rules *rules)
 	while (++i < rules->nb_philo)
 	{
 		if (pthread_create(&(rules->philos[i]->thread_id),
-				NULL, p_thread, &(rules->philos)))
+				NULL, p_thread, rules->philos[i]))
 			return (EXIT_FAILURE);
 	}
 	check_if_dead(rules);
-	if (join_and_exit(rules))
-		return (EXIT_FAILURE);
+	join_and_exit(rules);
+	rules_cleaner(rules);
 	return (EXIT_SUCCESS);
 }

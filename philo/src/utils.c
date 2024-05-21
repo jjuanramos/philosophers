@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:16:30 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 10:47:35 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:27:57 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,10 @@ void	rules_cleaner(t_rules *rules)
 		{
 			i = 0;
 			while (i < rules->nb_philo)
-			{
 				free(rules->philos[i++]);
-				pthread_mutex_destroy(&(rules->forks[i]));
-			}
 			free(rules->philos);
 			free(rules->forks);
 		}
-		pthread_mutex_destroy(&(rules->logger));
-		pthread_mutex_destroy(&(rules->meal_check));
 	}
 }
 
