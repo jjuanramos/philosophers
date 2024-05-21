@@ -6,15 +6,12 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 11:32:07 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:34:20 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/*
-	Should philo_sleeps go before or after last_meal calculation?
-*/
 void	philo_eats(t_philo *phi, t_rules *rules)
 {
 	pthread_mutex_lock(&(rules->forks[phi->lf_id]));
@@ -22,10 +19,10 @@ void	philo_eats(t_philo *phi, t_rules *rules)
 	pthread_mutex_lock(&(rules->forks[phi->rf_id]));
 	print_action(phi, "has taken a fork");
 	print_action(phi, "is eating");
+	philo_sleeps(rules->time_to_eat);
 	pthread_mutex_lock(&(rules->meal_check));
 	phi->last_meal = current_timestamp();
 	(phi->n_meals)++;
-	philo_sleeps(rules->time_to_eat);
 	pthread_mutex_unlock(&(rules->meal_check));
 	pthread_mutex_unlock(&(rules->forks[phi->lf_id]));
 	pthread_mutex_unlock(&(rules->forks[phi->rf_id]));
