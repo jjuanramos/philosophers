@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:54:21 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/17 14:53:30 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 12:03:26 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (launch_threads(&rules))
 		return (EXIT_FAILURE);
+	rules_cleaner(&rules);
 	return (EXIT_SUCCESS);
 }

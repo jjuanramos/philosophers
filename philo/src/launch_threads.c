@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 12:00:48 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 12:04:36 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	philo_eats(t_philo *phi, t_rules *rules)
 	pthread_mutex_lock(&(rules->meal_check));
 	print_action(phi, "is eating");
 	phi->last_meal = timestamp();
+	(phi->n_meals)++;
 	pthread_mutex_unlock(&(rules->meal_check));
 	philo_sleeps(rules->time_to_eat);
-	(phi->n_meals)++;
 	pthread_mutex_unlock(&(rules->forks[phi->lf_id]));
 	pthread_mutex_unlock(&(rules->forks[phi->rf_id]));
 }
@@ -90,8 +90,8 @@ int	join_and_exit(t_rules *rules)
 			return (EXIT_FAILURE);
 	if (pthread_mutex_destroy(&(rules->logger)))
 		return (EXIT_FAILURE);
-	if (pthread_mutex_destroy(&(rules->meal_check)))
-		return (EXIT_FAILURE);
+	// if (pthread_mutex_destroy(&(rules->meal_check)))
+	// 	return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -109,6 +109,5 @@ int	launch_threads(t_rules *rules)
 	}
 	check_if_dead(rules, rules->philos);
 	join_and_exit(rules);
-	// rules_cleaner(rules);
 	return (EXIT_SUCCESS);
 }
