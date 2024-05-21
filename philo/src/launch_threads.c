@@ -6,20 +6,11 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 11:15:24 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:16:36 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	philo_sleeps(int naptime)
-{
-	long long	starting_time;
-
-	starting_time = current_timestamp();
-	while (time_diff(starting_time, current_timestamp()) < naptime)
-		usleep(50);
-}
 
 /*
 	Should philo_sleeps go before or after last_meal calculation?

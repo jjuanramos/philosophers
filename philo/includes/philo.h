@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 11:02:38 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:17:12 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int					init_all(t_rules *rules, char **argv);
 /*	time			*/
 long long			current_timestamp(void);
 long long			time_diff(long long time1, long long time2);
+void				philo_sleeps(int naptime);
 /*	utils			*/
 int					ft_atoi(const char *str);
 void				rules_cleaner(t_rules *rules);
