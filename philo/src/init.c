@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/20 19:57:22 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 10:24:18 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	init_all(t_rules *rules, char **argv)
 	rules->time_to_die = ft_atoi(argv[2]);
 	rules->time_to_eat = ft_atoi(argv[3]);
 	rules->time_to_sleep = ft_atoi(argv[4]);
+	rules->dead = 0;
+	rules->all_ate = 0;
 	if (rules->nb_philo < 1 || rules->time_to_die < 0
 		|| rules->time_to_eat < 0 || rules->time_to_sleep < 0)
 		return (print_error(rules, "Init. error: philo's args\n", 0));
