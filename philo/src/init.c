@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 12:59:06 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:56:27 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	init_all(t_rules *rules, char **argv)
 	if (argv[5])
 	{
 		rules->meals_needed = ft_atoi(argv[5]);
-		if (rules->meals_needed < 0)
+		if (rules->meals_needed <= 0)
 			return (print_error(rules, "Init. error: philo's args\n", 0));
 	}
 	else
