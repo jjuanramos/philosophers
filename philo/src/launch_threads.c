@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 13:21:16 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:59:41 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	check_if_dead(t_rules *r, t_philo **p)
 				r->dead = 1;
 			}
 			pthread_mutex_unlock(&(r->meal_check));
-			usleep(100);
 		}
 		if (r->dead)
 			break ;
