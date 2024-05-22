@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:16:30 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/22 13:11:30 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/22 13:35:56 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,9 @@ void	rules_cleaner(t_rules *rules)
 
 int	print_error(t_rules *rules, char *str, int to_free)
 {
-	int	i;
-
 	if (to_free)
 		rules_cleaner(rules);
-	i = 0;
-	write(2, "philo: ", 7);
-	while (str[i])
-		write(2, &str[i++], 1);
+	printf("\033[0;97mphilo: %s\n", str);
 	return (EXIT_FAILURE);
 }
 
