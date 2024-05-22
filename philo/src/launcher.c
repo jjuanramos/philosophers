@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   launch_threads.c                                   :+:      :+:    :+:   */
+/*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 18:01:13 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/22 13:41:31 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ int	launch_threads(t_rules *rules)
 		if (pthread_create(&(rules->philos[i]->thread_id),
 				NULL, p_thread, rules->philos[i]))
 			return (print_error(NULL, "Error: Failure init. threads.\n", 0));
+		pthread_mutex_lock(&(rules->meal_check));
 		rules->philos[i]->last_meal = timestamp();
+		pthread_mutex_unlock(&(rules->meal_check));
 	}
 	check_if_dead(rules, rules->philos);
 	join_and_exit(rules);
