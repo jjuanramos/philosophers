@@ -6,7 +6,7 @@
 #    By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 12:55:30 by juramos           #+#    #+#              #
-#    Updated: 2024/05/22 13:19:13 by juramos          ###   ########.fr        #
+#    Updated: 2024/05/22 17:28:01 by juramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME 		= 	philo
 
 # Compiler
 CC 			= 	gcc
-CFLAGS 		= 	-Wall -Werror -Wextra -pthread
+CFLAGS 		= 	-Wall -Werror -Wextra -pthread -g3 -fsanitize=thread
 
 # Sources
 SRC_DIR 	= 	src/
