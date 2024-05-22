@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:16:30 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/22 13:01:13 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/22 13:11:30 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,4 @@ int	ft_atoi(const char *str)
 		pos++;
 	}
 	return (num * sign);
-}
-
-void	print_action(t_philo *phi, char *action)
-{
-	if (phi->id > 0 && phi->id <= phi->rules->nb_philo)
-	{
-		pthread_mutex_lock(&(phi->rules->logger));
-		printf("%lli %d %s\n", timestamp(), phi->id, action);
-		pthread_mutex_unlock(&(phi->rules->logger));
-	}
 }

@@ -6,7 +6,7 @@
 #    By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 12:55:30 by juramos           #+#    #+#              #
-#    Updated: 2024/05/21 13:18:01 by juramos          ###   ########.fr        #
+#    Updated: 2024/05/22 13:19:13 by juramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS 		= 	-Wall -Werror -Wextra -pthread
 
 # Sources
 SRC_DIR 	= 	src/
-SRC_FILES 	= 	main utils init time launch_threads
+SRC_FILES 	= 	main utils init time launcher logger
 				
 SRC 		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 
@@ -52,7 +52,7 @@ MAKEFLAGS 	+=	--no-print-directory
 all: $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-	@echo "\033[0;33mCompiling ${notdir $<}			in	$(SRC_DIR)"
+	@echo "$(WHITE)Compiling ${notdir $<}		in	$(SRC_DIR)"
 	@$(CC) $(CFLAGS) $(INC_MS) -c $< -o $@
 
 $(OBJF):
@@ -61,7 +61,7 @@ $(OBJF):
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
-	@echo "$(GREEN)philo compiled!$(DEF_COLOR)"
+	@echo "$(GREEN)\n\t      philo compiled!\n\n\n<==========================================>\n\n$(DEF_COLOR)"
 
 clean:
 	@rm -rf $(OBJ_DIR)
@@ -72,7 +72,7 @@ fclean: clean
 	@echo "$(CYAN)philo executable files cleaned!$(DEF_COLOR)"
 
 re: fclean all
-	@echo "$(GREEN)Cleaned and rebuilt everything for philo!$(DEF_COLOR)"
+	@echo "$(GREEN)Cleaned and rebuilt everything for philo!\n\n\n<==========================================>\n\n$(DEF_COLOR)"
 
 norm:
 	@norminette | grep -v Norme -B1 || true

@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/21 11:45:37 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/22 13:17:14 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ void				philo_sleeps(int naptime);
 int					ft_atoi(const char *str);
 void				rules_cleaner(t_rules *rules);
 int					print_error(t_rules *rules, char *str, int to_free);
+
+/*	logger			*/
 void				print_action(t_philo *phi, char *action);
 
-/*	launch_threads	*/
+/*	launcher	*/
 int					launch_threads(t_rules *rules);
 
 #endif
