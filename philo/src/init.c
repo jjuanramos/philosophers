@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:32:03 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:38:41 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static int	init_philos(t_rules *rules)
 	int	i;
 
 	i = 0;
+	rules->philos = malloc(sizeof(t_philo) * rules->nb_philo);
+	if (!rules->philos)
+		return (EXIT_FAILURE);
 	while (i < rules->nb_philo)
 	{
 		rules->philos[i].id = i + 1;
@@ -41,6 +44,9 @@ static int	init_mutex(t_rules *rules)
 	int	i;
 
 	i = -1;
+	rules->forks = malloc(sizeof(pthread_mutex_t) * (rules->nb_philo));
+	if (!rules->forks)
+		return (EXIT_FAILURE);
 	while (++i < rules->nb_philo)
 	{
 		if (pthread_mutex_init(&(rules->forks[i]), NULL))
@@ -77,6 +83,9 @@ int	init_all(t_rules *rules, char **argv)
 	if (init_philos(rules))
 		return (print_error("Init. error: rules->philo's alloc\n"));
 	if (init_mutex(rules))
+	{
+		free(rules->philos);
 		return (print_error("Init. error: mutex\n"));
+	}
 	return (EXIT_SUCCESS);
 }

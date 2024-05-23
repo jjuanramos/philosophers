@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:32:26 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:39:03 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	join_and_exit(t_rules *rules)
 		return (print_error("Error: Failure destroying mutex.\n"));
 	if (pthread_mutex_destroy(&(rules->meal_check)))
 		return (print_error("Error: Failure destroying mutex.\n"));
+	free(rules->philos);
+	free(rules->forks);
 	return (EXIT_SUCCESS);
 }
 
