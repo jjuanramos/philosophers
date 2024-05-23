@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 13:00:54 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 13:03:43 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*p_thread(void *philo)
 	phi = (t_philo *)philo;
 	rules = phi->rules;
 	if (phi->id % 2)
-		usleep(15000);
+		usleep(10000);
 	while (1)
 	{
 		if (check_condition(&(rules->dead), &(rules->dead_check)))
