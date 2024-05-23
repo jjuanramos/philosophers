@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 13:05:42 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 10:51:41 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 15:53:31 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	print_action(t_philo *phi, char *action)
 	{
 		pthread_mutex_lock(&(phi->rules->logger));
 		if (!ft_strncmp(action, "died", ft_strlen("died")))
-			printf("\033[0;91m%lli %d %s\n", timestamp(), phi->id, action);
+			printf("\033[1;31m%lli %d %s\n", timestamp(), phi->id, action);
 		else if (!ft_strncmp(action, "is thinking", ft_strlen("is thinking")))
-			printf("\033[0;93m%lli %d %s\n", timestamp(), phi->id, action);
+			printf("\033[0;95m%lli %d %s\n", timestamp(), phi->id, action);
 		else if (!ft_strncmp(action, "is eating", ft_strlen("is eating")))
 			printf("\033[0;92m%lli %d %s\n", timestamp(), phi->id, action);
 		else if (!ft_strncmp(action, "is sleeping", ft_strlen("is sleeping")))
