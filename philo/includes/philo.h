@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:35:48 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 13:01:09 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_rules
 	pthread_mutex_t	logger;
 	pthread_mutex_t	meal_check;
 	pthread_mutex_t	all_ate_check;
+	pthread_mutex_t	dead_check;
 }					t_rules;
 
 /*	init			*/
@@ -64,6 +65,7 @@ void				print_action(t_philo *phi, char *action);
 
 /*	checker			*/
 void				main_process_checker(t_rules *r, t_philo *p);
+int					check_condition(int *val, pthread_mutex_t *mut);
 
 /*	launcher	*/
 int					launch_threads(t_rules *rules);

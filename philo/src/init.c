@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:38:41 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:46:33 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static int	init_mutex(t_rules *rules)
 	if (pthread_mutex_init(&(rules->meal_check), NULL))
 		return (EXIT_FAILURE);
 	if (pthread_mutex_init(&(rules->all_ate_check), NULL))
+		return (EXIT_FAILURE);
+	if (pthread_mutex_init(&(rules->dead_check), NULL))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

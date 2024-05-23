@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 12:18:05 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:29:07 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 13:01:02 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ static void	check_if_dead(t_rules *r, t_philo *p)
 		pthread_mutex_lock(&(r->meal_check));
 		if (time_diff(p[i].last_meal, timestamp()) > r->time_to_die)
 		{
+			pthread_mutex_lock(&(r->dead_check));
 			print_action(&p[i], "died");
 			r->dead = 1;
+			pthread_mutex_unlock(&(r->dead_check));
 		}
 		pthread_mutex_unlock(&(r->meal_check));
 		usleep(50);
@@ -47,6 +49,18 @@ static void	check_if_all_ate(t_rules *r, t_philo *p)
 		pthread_mutex_unlock(&(r->all_ate_check));
 	}
 	usleep(50);
+}
+
+int	check_condition(int *val, pthread_mutex_t *mut)
+{
+	int	ret;
+
+	ret = 0;
+	pthread_mutex_lock(mut);
+	if (*val)
+		ret = 1;
+	pthread_mutex_unlock(mut);
+	return (ret);
 }
 
 void	main_process_checker(t_rules *r, t_philo *p)

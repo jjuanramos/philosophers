@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:39:03 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 13:00:54 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,14 @@ void	*p_thread(void *philo)
 	phi = (t_philo *)philo;
 	rules = phi->rules;
 	if (phi->id % 2)
-		usleep(10000);
-	while (!rules->dead)
+		usleep(15000);
+	while (1)
 	{
-		philo_eats(phi, rules);
-		pthread_mutex_lock(&(rules->all_ate_check));
-		if (rules->all_ate)
-		{
-			pthread_mutex_unlock(&(rules->all_ate_check));
+		if (check_condition(&(rules->dead), &(rules->dead_check)))
 			break ;
-		}
-		else
-			pthread_mutex_unlock(&(rules->all_ate_check));
+		philo_eats(phi, rules);
+		if (check_condition(&(rules->all_ate), &(rules->all_ate_check)))
+			break ;
 		print_action(phi, "is sleeping");
 		philo_sleeps(rules->time_to_sleep);
 		print_action(phi, "is thinking");
