@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 13:05:42 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/22 13:12:35 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 10:51:41 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 void	print_action(t_philo *phi, char *action)
 {
-	if (phi->id > 0 && phi->id <= phi->rules->nb_philo)
+	if (phi && phi->id > 0 && phi->id <= phi->rules->nb_philo)
 	{
 		pthread_mutex_lock(&(phi->rules->logger));
 		if (!ft_strncmp(action, "died", ft_strlen("died")))

@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/22 13:41:31 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 11:09:12 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ int	join_and_exit(t_rules *rules)
 	int	i;
 
 	i = -1;
-	while (++i)
+	while (++i < rules->nb_philo)
 	{
 		if (pthread_join(rules->philos[i]->thread_id, NULL))
 			return (print_error(NULL, "Error: Failure joining threads.\n", 0));
 	}
 	i = -1;
-	while (++i)
+	while (++i < rules->nb_philo)
 	{
 		if (pthread_mutex_destroy(&(rules->forks[i])))
 			return (print_error(NULL, "Error: Failure destroying mutex.\n", 0));
