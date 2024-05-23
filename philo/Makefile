@@ -6,7 +6,7 @@
 #    By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 12:55:30 by juramos           #+#    #+#              #
-#    Updated: 2024/05/22 17:28:01 by juramos          ###   ########.fr        #
+#    Updated: 2024/05/23 12:18:52 by juramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS 		= 	-Wall -Werror -Wextra -pthread -g3 -fsanitize=thread
 
 # Sources
 SRC_DIR 	= 	src/
-SRC_FILES 	= 	main utils init time launcher logger
+SRC_FILES 	= 	main utils init time launcher logger checker
 				
 SRC 		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 

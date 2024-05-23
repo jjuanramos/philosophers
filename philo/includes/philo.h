@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 11:19:22 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:18:41 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ int					print_error(t_rules *rules, char *str, int to_free);
 
 /*	logger			*/
 void				print_action(t_philo *phi, char *action);
+
+/*	checker			*/
+void				main_process_checker(t_rules *r, t_philo **p);
 
 /*	launcher	*/
 int					launch_threads(t_rules *rules);

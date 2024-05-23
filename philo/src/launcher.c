@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:17:17 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:17:51 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,57 +63,6 @@ void	*p_thread(void *philo)
 		print_action(phi, "is thinking");
 	}
 	return (NULL);
-}
-
-void	check_if_dead(t_rules *r, t_philo **p)
-{
-	int	i;
-
-	i = -1;
-	while (++i < r->nb_philo && !(r->dead))
-	{
-		pthread_mutex_lock(&(r->meal_check));
-		if (time_diff(p[i]->last_meal, timestamp()) > r->time_to_die)
-		{
-			print_action(p[i], "died");
-			r->dead = 1;
-		}
-		pthread_mutex_unlock(&(r->meal_check));
-		usleep(50);
-	}
-}
-
-void	check_if_all_ate(t_rules *r, t_philo **p)
-{
-	int	i;
-
-	i = 0;
-	while (r->meals_needed != -1
-		&& i < r->nb_philo)
-	{
-		pthread_mutex_lock(&(r->meal_check));
-		if (p[i]->n_meals >= r->meals_needed)
-			i++;
-		pthread_mutex_unlock(&(r->meal_check));
-		usleep(50);
-	}
-	if (i == r->nb_philo)
-	{
-		pthread_mutex_lock(&(r->all_ate_check));
-		r->all_ate = 1;
-		pthread_mutex_unlock(&(r->all_ate_check));
-	}
-}
-
-void	main_process_checker(t_rules *r, t_philo **p)
-{
-	while (!(r->all_ate))
-	{
-		check_if_dead(r, p);
-		if (r->dead)
-			break ;
-		check_if_all_ate(r, p);
-	}
 }
 
 int	join_and_exit(t_rules *rules)
