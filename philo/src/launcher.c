@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:05:31 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:17:17 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,14 @@ void	*p_thread(void *philo)
 	while (!rules->dead)
 	{
 		philo_eats(phi, rules);
+		pthread_mutex_lock(&(rules->all_ate_check));
 		if (rules->all_ate)
+		{
+			pthread_mutex_unlock(&(rules->all_ate_check));
 			break ;
+		}
+		else
+			pthread_mutex_unlock(&(rules->all_ate_check));
 		print_action(phi, "is sleeping");
 		philo_sleeps(rules->time_to_sleep);
 		print_action(phi, "is thinking");
@@ -73,6 +79,7 @@ void	check_if_dead(t_rules *r, t_philo **p)
 			r->dead = 1;
 		}
 		pthread_mutex_unlock(&(r->meal_check));
+		usleep(50);
 	}
 }
 
@@ -88,6 +95,7 @@ void	check_if_all_ate(t_rules *r, t_philo **p)
 		if (p[i]->n_meals >= r->meals_needed)
 			i++;
 		pthread_mutex_unlock(&(r->meal_check));
+		usleep(50);
 	}
 	if (i == r->nb_philo)
 	{
