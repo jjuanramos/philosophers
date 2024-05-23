@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 11:17:38 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:05:31 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,20 @@
 
 void	philo_eats(t_philo *phi, t_rules *rules)
 {
-	pthread_mutex_lock(&(rules->forks[phi->lf_id]));
-	print_action(phi, "has taken a fork");
-	pthread_mutex_lock(&(rules->forks[phi->rf_id]));
-	print_action(phi, "has taken a fork");
+	if (phi->id % 2)
+	{
+		pthread_mutex_lock(&(rules->forks[phi->rf_id]));
+		print_action(phi, "has taken a fork");
+		pthread_mutex_lock(&(rules->forks[phi->lf_id]));
+		print_action(phi, "has taken a fork");
+	}
+	else
+	{
+		pthread_mutex_lock(&(rules->forks[phi->lf_id]));
+		print_action(phi, "has taken a fork");
+		pthread_mutex_lock(&(rules->forks[phi->rf_id]));
+		print_action(phi, "has taken a fork");
+	}
 	pthread_mutex_lock(&(rules->meal_check));
 	print_action(phi, "is eating");
 	phi->last_meal = timestamp();
@@ -80,7 +90,11 @@ void	check_if_all_ate(t_rules *r, t_philo **p)
 		pthread_mutex_unlock(&(r->meal_check));
 	}
 	if (i == r->nb_philo)
+	{
+		pthread_mutex_lock(&(r->all_ate_check));
 		r->all_ate = 1;
+		pthread_mutex_unlock(&(r->all_ate_check));
+	}
 }
 
 void	main_process_checker(t_rules *r, t_philo **p)
