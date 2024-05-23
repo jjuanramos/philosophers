@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 12:18:05 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:18:21 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:20:49 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,18 @@ static void	check_if_all_ate(t_rules *r, t_philo **p)
 	int	i;
 
 	i = 0;
+	pthread_mutex_lock(&(r->meal_check));
 	while (r->meals_needed != -1
-		&& i < r->nb_philo)
-	{
-		pthread_mutex_lock(&(r->meal_check));
-		if (p[i]->n_meals >= r->meals_needed)
-			i++;
-		pthread_mutex_unlock(&(r->meal_check));
-		usleep(50);
-	}
+		&& i < r->nb_philo && p[i]->n_meals >= r->meals_needed)
+		i++;
+	pthread_mutex_unlock(&(r->meal_check));
 	if (i == r->nb_philo)
 	{
 		pthread_mutex_lock(&(r->all_ate_check));
 		r->all_ate = 1;
 		pthread_mutex_unlock(&(r->all_ate_check));
 	}
+	usleep(50);
 }
 
 void	main_process_checker(t_rules *r, t_philo **p)
