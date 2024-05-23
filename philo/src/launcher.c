@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 11:09:12 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 11:17:38 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,46 @@ void	*p_thread(void *philo)
 
 void	check_if_dead(t_rules *r, t_philo **p)
 {
-	int		i;
+	int	i;
 
+	i = -1;
+	while (++i < r->nb_philo && !(r->dead))
+	{
+		pthread_mutex_lock(&(r->meal_check));
+		if (time_diff(p[i]->last_meal, timestamp()) > r->time_to_die)
+		{
+			print_action(p[i], "died");
+			r->dead = 1;
+		}
+		pthread_mutex_unlock(&(r->meal_check));
+	}
+}
+
+void	check_if_all_ate(t_rules *r, t_philo **p)
+{
+	int	i;
+
+	i = 0;
+	while (r->meals_needed != -1
+		&& i < r->nb_philo)
+	{
+		pthread_mutex_lock(&(r->meal_check));
+		if (p[i]->n_meals >= r->meals_needed)
+			i++;
+		pthread_mutex_unlock(&(r->meal_check));
+	}
+	if (i == r->nb_philo)
+		r->all_ate = 1;
+}
+
+void	main_process_checker(t_rules *r, t_philo **p)
+{
 	while (!(r->all_ate))
 	{
-		i = -1;
-		while (++i < r->nb_philo && !(r->dead))
-		{
-			pthread_mutex_lock(&(r->meal_check));
-			if (time_diff(p[i]->last_meal, timestamp()) > r->time_to_die)
-			{
-				print_action(p[i], "died");
-				r->dead = 1;
-			}
-			pthread_mutex_unlock(&(r->meal_check));
-		}
+		check_if_dead(r, p);
 		if (r->dead)
 			break ;
-		i = 0;
-		while (r->meals_needed != -1
-			&& i < r->nb_philo && p[i]->n_meals >= r->meals_needed)
-			i++;
-		if (i == r->nb_philo)
-			r->all_ate = 1;
+		check_if_all_ate(r, p);
 	}
 }
 
@@ -115,7 +132,7 @@ int	launch_threads(t_rules *rules)
 		rules->philos[i]->last_meal = timestamp();
 		pthread_mutex_unlock(&(rules->meal_check));
 	}
-	check_if_dead(rules, rules->philos);
+	main_process_checker(rules, rules->philos);
 	join_and_exit(rules);
 	rules_cleaner(rules);
 	return (EXIT_SUCCESS);
