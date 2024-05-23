@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 13:03:43 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 15:42:49 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,18 @@ int	join_and_exit(t_rules *rules)
 	while (++i < rules->nb_philo)
 	{
 		if (pthread_join(rules->philos[i].thread_id, NULL))
-			return (print_error("Error: Failure joining threads.\n"));
+			return (print_error("Error: Failure joining threads."));
 	}
 	i = -1;
 	while (++i < rules->nb_philo)
 	{
 		if (pthread_mutex_destroy(&(rules->forks[i])))
-			return (print_error("Error: Failure destroying mutex.\n"));
+			return (print_error("Error: Failure destroying mutex."));
 	}
 	if (pthread_mutex_destroy(&(rules->logger)))
-		return (print_error("Error: Failure destroying mutex.\n"));
+		return (print_error("Error: Failure destroying mutex."));
 	if (pthread_mutex_destroy(&(rules->meal_check)))
-		return (print_error("Error: Failure destroying mutex.\n"));
+		return (print_error("Error: Failure destroying mutex."));
 	free(rules->philos);
 	free(rules->forks);
 	return (EXIT_SUCCESS);
@@ -96,7 +96,7 @@ int	launch_threads(t_rules *rules)
 	{
 		if (pthread_create(&(rules->philos[i].thread_id),
 				NULL, p_thread, &(rules->philos[i])))
-			return (print_error("Error: Failure init. threads.\n"));
+			return (print_error("Error: Failure init. threads."));
 		pthread_mutex_lock(&(rules->meal_check));
 		rules->philos[i].last_meal = timestamp();
 		pthread_mutex_unlock(&(rules->meal_check));

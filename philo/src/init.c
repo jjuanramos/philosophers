@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:46:33 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 15:42:34 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,21 @@ int	init_all(t_rules *rules, char **argv)
 	rules->all_ate = 0;
 	if (rules->nb_philo < 1 || rules->time_to_die < 0
 		|| rules->time_to_eat < 0 || rules->time_to_sleep < 0)
-		return (print_error("Init. error: philo's args\n"));
+		return (print_error("Init. error: philo's args"));
 	if (argv[5])
 	{
 		rules->meals_needed = ft_atoi(argv[5]);
 		if (rules->meals_needed <= 0)
-			return (print_error("Init. error: philo's args\n"));
+			return (print_error("Init. error: philo's args"));
 	}
 	else
 		rules->meals_needed = -1;
 	if (init_philos(rules))
-		return (print_error("Init. error: rules->philo's alloc\n"));
+		return (print_error("Init. error: rules->philo's alloc"));
 	if (init_mutex(rules))
 	{
 		free(rules->philos);
-		return (print_error("Init. error: mutex\n"));
+		return (print_error("Init. error: mutex"));
 	}
 	return (EXIT_SUCCESS);
 }
