@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 12:18:05 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 18:42:09 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 18:46:38 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ static void	check_if_all_ate(t_rules *r, t_philo *p)
 		i++;
 	pthread_mutex_unlock(&(r->meal_check));
 	if (i == r->nb_philo)
-	{
-		pthread_mutex_lock(&(r->meal_check));
 		r->all_ate = 1;
-		pthread_mutex_unlock(&(r->meal_check));
-	}
 	usleep(50);
 }
 
