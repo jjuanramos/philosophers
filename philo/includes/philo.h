@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 13:01:09 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 18:43:55 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ typedef struct s_rules
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	logger;
 	pthread_mutex_t	meal_check;
-	pthread_mutex_t	all_ate_check;
-	pthread_mutex_t	dead_check;
 }					t_rules;
 
 /*	init			*/

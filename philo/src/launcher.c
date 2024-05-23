@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 15:42:49 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 18:42:56 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	*p_thread(void *philo)
 		usleep(10000);
 	while (1)
 	{
-		if (check_condition(&(rules->dead), &(rules->dead_check)))
+		if (check_condition(&(rules->dead), &(rules->meal_check)))
 			break ;
 		philo_eats(phi, rules);
-		if (check_condition(&(rules->all_ate), &(rules->all_ate_check)))
+		if (check_condition(&(rules->all_ate), &(rules->meal_check)))
 			break ;
 		print_action(phi, "is sleeping");
 		philo_sleeps(rules->time_to_sleep);
