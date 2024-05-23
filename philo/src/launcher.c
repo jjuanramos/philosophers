@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:17:51 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:32:26 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,19 @@ int	join_and_exit(t_rules *rules)
 	i = -1;
 	while (++i < rules->nb_philo)
 	{
-		if (pthread_join(rules->philos[i]->thread_id, NULL))
-			return (print_error(NULL, "Error: Failure joining threads.\n", 0));
+		if (pthread_join(rules->philos[i].thread_id, NULL))
+			return (print_error("Error: Failure joining threads.\n"));
 	}
 	i = -1;
 	while (++i < rules->nb_philo)
 	{
 		if (pthread_mutex_destroy(&(rules->forks[i])))
-			return (print_error(NULL, "Error: Failure destroying mutex.\n", 0));
+			return (print_error("Error: Failure destroying mutex.\n"));
 	}
 	if (pthread_mutex_destroy(&(rules->logger)))
-		return (print_error(NULL, "Error: Failure destroying mutex.\n", 0));
+		return (print_error("Error: Failure destroying mutex.\n"));
 	if (pthread_mutex_destroy(&(rules->meal_check)))
-		return (print_error(NULL, "Error: Failure destroying mutex.\n", 0));
+		return (print_error("Error: Failure destroying mutex.\n"));
 	return (EXIT_SUCCESS);
 }
 
@@ -96,15 +96,14 @@ int	launch_threads(t_rules *rules)
 	rules->starting_time = timestamp();
 	while (++i < rules->nb_philo)
 	{
-		if (pthread_create(&(rules->philos[i]->thread_id),
-				NULL, p_thread, rules->philos[i]))
-			return (print_error(NULL, "Error: Failure init. threads.\n", 0));
+		if (pthread_create(&(rules->philos[i].thread_id),
+				NULL, p_thread, &(rules->philos[i])))
+			return (print_error("Error: Failure init. threads.\n"));
 		pthread_mutex_lock(&(rules->meal_check));
-		rules->philos[i]->last_meal = timestamp();
+		rules->philos[i].last_meal = timestamp();
 		pthread_mutex_unlock(&(rules->meal_check));
 	}
 	main_process_checker(rules, rules->philos);
 	join_and_exit(rules);
-	rules_cleaner(rules);
 	return (EXIT_SUCCESS);
 }

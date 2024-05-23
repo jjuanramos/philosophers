@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:18:41 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:31:44 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct s_rules
 	int				dead;
 	int				all_ate;
 	long long		starting_time;
-	t_philo			**philos;
-	pthread_mutex_t	*forks;
+	t_philo			philos[250];
+	pthread_mutex_t	forks[250];
 	pthread_mutex_t	logger;
 	pthread_mutex_t	meal_check;
 	pthread_mutex_t	all_ate_check;
@@ -57,14 +57,13 @@ long long			time_diff(long long time1, long long time2);
 void				philo_sleeps(int naptime);
 /*	utils			*/
 int					ft_atoi(const char *str);
-void				rules_cleaner(t_rules *rules);
-int					print_error(t_rules *rules, char *str, int to_free);
+int					print_error(char *str);
 
 /*	logger			*/
 void				print_action(t_philo *phi, char *action);
 
 /*	checker			*/
-void				main_process_checker(t_rules *r, t_philo **p);
+void				main_process_checker(t_rules *r, t_philo *p);
 
 /*	launcher	*/
 int					launch_threads(t_rules *rules);

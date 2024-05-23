@@ -6,13 +6,13 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 12:18:05 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 12:20:49 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:29:07 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	check_if_dead(t_rules *r, t_philo **p)
+static void	check_if_dead(t_rules *r, t_philo *p)
 {
 	int	i;
 
@@ -20,9 +20,9 @@ static void	check_if_dead(t_rules *r, t_philo **p)
 	while (++i < r->nb_philo && !(r->dead))
 	{
 		pthread_mutex_lock(&(r->meal_check));
-		if (time_diff(p[i]->last_meal, timestamp()) > r->time_to_die)
+		if (time_diff(p[i].last_meal, timestamp()) > r->time_to_die)
 		{
-			print_action(p[i], "died");
+			print_action(&p[i], "died");
 			r->dead = 1;
 		}
 		pthread_mutex_unlock(&(r->meal_check));
@@ -30,14 +30,14 @@ static void	check_if_dead(t_rules *r, t_philo **p)
 	}
 }
 
-static void	check_if_all_ate(t_rules *r, t_philo **p)
+static void	check_if_all_ate(t_rules *r, t_philo *p)
 {
 	int	i;
 
 	i = 0;
 	pthread_mutex_lock(&(r->meal_check));
 	while (r->meals_needed != -1
-		&& i < r->nb_philo && p[i]->n_meals >= r->meals_needed)
+		&& i < r->nb_philo && p[i].n_meals >= r->meals_needed)
 		i++;
 	pthread_mutex_unlock(&(r->meal_check));
 	if (i == r->nb_philo)
@@ -49,7 +49,7 @@ static void	check_if_all_ate(t_rules *r, t_philo **p)
 	usleep(50);
 }
 
-void	main_process_checker(t_rules *r, t_philo **p)
+void	main_process_checker(t_rules *r, t_philo *p)
 {
 	while (!(r->all_ate))
 	{

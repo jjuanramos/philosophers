@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:45:01 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 11:19:18 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:32:03 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,20 @@ static int	init_philos(t_rules *rules)
 	i = 0;
 	while (i < rules->nb_philo)
 	{
-		rules->philos[i] = malloc(1 * sizeof(t_philo));
-		if (!rules->philos[i])
-			return (EXIT_FAILURE);
-		rules->philos[i]->id = i + 1;
-		rules->philos[i]->n_meals = 0;
-		rules->philos[i]->last_meal = 0;
-		rules->philos[i]->rules = rules;
+		rules->philos[i].id = i + 1;
+		rules->philos[i].n_meals = 0;
+		rules->philos[i].last_meal = 0;
+		rules->philos[i].rules = rules;
 		if (i == 0)
-			rules->philos[i]->rf_id = rules->nb_philo;
+			rules->philos[i].rf_id = rules->nb_philo;
 		else
-			rules->philos[i]->rf_id = i;
+			rules->philos[i].rf_id = i;
 		if (i + 1 == rules->nb_philo)
-			rules->philos[i]->lf_id = rules->nb_philo;
+			rules->philos[i].lf_id = rules->nb_philo;
 		else
-			rules->philos[i]->lf_id = (i + 1) % rules->nb_philo;
+			rules->philos[i].lf_id = (i + 1) % rules->nb_philo;
 		i++;
 	}
-	rules->philos[i] = NULL;
 	return (EXIT_SUCCESS);
 }
 
@@ -45,9 +41,6 @@ static int	init_mutex(t_rules *rules)
 	int	i;
 
 	i = -1;
-	rules->forks = malloc(rules->nb_philo * sizeof(pthread_mutex_t));
-	if (!rules->forks)
-		return (EXIT_FAILURE);
 	while (++i < rules->nb_philo)
 	{
 		if (pthread_mutex_init(&(rules->forks[i]), NULL))
@@ -72,21 +65,18 @@ int	init_all(t_rules *rules, char **argv)
 	rules->all_ate = 0;
 	if (rules->nb_philo < 1 || rules->time_to_die < 0
 		|| rules->time_to_eat < 0 || rules->time_to_sleep < 0)
-		return (print_error(rules, "Init. error: philo's args\n", 0));
+		return (print_error("Init. error: philo's args\n"));
 	if (argv[5])
 	{
 		rules->meals_needed = ft_atoi(argv[5]);
 		if (rules->meals_needed <= 0)
-			return (print_error(rules, "Init. error: philo's args\n", 0));
+			return (print_error("Init. error: philo's args\n"));
 	}
 	else
 		rules->meals_needed = -1;
-	rules->philos = malloc((rules->nb_philo + 1) * sizeof(t_philo *));
-	if (!rules->philos)
-		return (EXIT_FAILURE);
 	if (init_philos(rules))
-		return (print_error(rules, "Init. error: rules->philo's alloc\n", 1));
+		return (print_error("Init. error: rules->philo's alloc\n"));
 	if (init_mutex(rules))
-		return (print_error(rules, "Init. error: mutex\n", 1));
+		return (print_error("Init. error: mutex\n"));
 	return (EXIT_SUCCESS);
 }
