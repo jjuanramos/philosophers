@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 18:42:56 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/24 09:41:32 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	*p_thread(void *philo)
 		print_action(phi, "is sleeping");
 		philo_sleeps(rules->time_to_sleep);
 		print_action(phi, "is thinking");
+		usleep(50);
 	}
 	return (NULL);
 }
