@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/24 09:41:32 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/24 10:03:15 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,18 @@ int	join_and_exit(t_rules *rules)
 	int	i;
 
 	i = -1;
-	while (++i < rules->nb_philo)
+	if (rules->nb_philo)
 	{
-		if (pthread_join(rules->philos[i].thread_id, NULL))
-			return (print_error("Error: Failure joining threads."));
+		if (pthread_detach(rules->philos[0].thread_id))
+			return (print_error("Error: Failure detaching thread."));
+	}
+	else
+	{
+		while (++i < rules->nb_philo)
+		{
+			if (pthread_join(rules->philos[i].thread_id, NULL))
+				return (print_error("Error: Failure joining threads."));
+		}
 	}
 	i = -1;
 	while (++i < rules->nb_philo)
@@ -78,12 +86,6 @@ int	join_and_exit(t_rules *rules)
 		if (pthread_mutex_destroy(&(rules->forks[i])))
 			return (print_error("Error: Failure destroying mutex."));
 	}
-	if (pthread_mutex_destroy(&(rules->logger)))
-		return (print_error("Error: Failure destroying mutex."));
-	if (pthread_mutex_destroy(&(rules->meal_check)))
-		return (print_error("Error: Failure destroying mutex."));
-	free(rules->philos);
-	free(rules->forks);
 	return (EXIT_SUCCESS);
 }
 
@@ -104,5 +106,12 @@ int	launch_threads(t_rules *rules)
 	}
 	main_process_checker(rules, rules->philos);
 	join_and_exit(rules);
+	if (pthread_mutex_destroy(&(rules->logger)))
+		return (print_error("Error: Failure destroying mutex."));
+	if (pthread_mutex_destroy(&(rules->meal_check)))
+		return (print_error("Error: Failure destroying mutex."));
+	if (rules->philos)
+		free(rules->philos);
+	free(rules->forks);
 	return (EXIT_SUCCESS);
 }
