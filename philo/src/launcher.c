@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/27 11:40:12 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/27 11:47:42 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,14 @@ int	join_and_exit(t_rules *rules)
 			if (pthread_join(rules->philos[i].thread_id, NULL))
 				return (print_error("Error: Failure joining threads."));
 		}
-	}
-	i = -1;
-	while (++i < rules->nb_philo)
-	{
-		if (pthread_mutex_destroy(&(rules->forks[i])))
-			return (print_error("Error: Failure destroying mutex."));
+		i = -1;
+		while (++i < rules->nb_philo)
+		{
+			if (pthread_mutex_destroy(&(rules->forks[i])))
+				return (print_error("Error: Failure destroying mutex."));
+		}
+		if (rules->philos)
+			free(rules->philos);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -110,8 +112,6 @@ int	launch_threads(t_rules *rules)
 		return (print_error("Error: Failure destroying mutex."));
 	if (pthread_mutex_destroy(&(rules->meal_check)))
 		return (print_error("Error: Failure destroying mutex."));
-	if (rules->philos)
-		free(rules->philos);
 	free(rules->forks);
 	return (EXIT_SUCCESS);
 }
