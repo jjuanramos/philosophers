@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 12:18:05 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 18:49:18 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/27 11:18:35 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ void	main_process_checker(t_rules *r, t_philo *p)
 		if (r->dead)
 			break ;
 		check_if_all_ate(r, p);
+		usleep(50);
 	}
 }
