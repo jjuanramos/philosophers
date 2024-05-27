@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/27 10:23:47 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/27 11:40:12 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ void	philo_eats(t_philo *phi, t_rules *rules)
 {
 	if (phi->id % 2)
 	{
-		pthread_mutex_lock(&(rules->forks[phi->rf_id]));
-		print_action(phi, "has taken a fork");
 		pthread_mutex_lock(&(rules->forks[phi->lf_id]));
+		print_action(phi, "has taken a fork");
+		pthread_mutex_lock(&(rules->forks[phi->rf_id]));
 		print_action(phi, "has taken a fork");
 	}
 	else
 	{
-		pthread_mutex_lock(&(rules->forks[phi->lf_id]));
-		print_action(phi, "has taken a fork");
 		pthread_mutex_lock(&(rules->forks[phi->rf_id]));
+		print_action(phi, "has taken a fork");
+		pthread_mutex_lock(&(rules->forks[phi->lf_id]));
 		print_action(phi, "has taken a fork");
 	}
 	pthread_mutex_lock(&(rules->meal_check));
