@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/24 10:03:15 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/27 10:23:47 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	join_and_exit(t_rules *rules)
 	int	i;
 
 	i = -1;
-	if (rules->nb_philo)
+	if (rules->nb_philo == 1)
 	{
 		if (pthread_detach(rules->philos[0].thread_id))
 			return (print_error("Error: Failure detaching thread."));
