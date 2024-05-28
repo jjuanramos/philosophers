@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/27 11:47:42 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/28 15:18:50 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	launch_threads(t_rules *rules)
 
 	i = -1;
 	rules->starting_time = timestamp();
+	rules->last_time_eaten = timestamp();
 	while (++i < rules->nb_philo)
 	{
 		if (pthread_create(&(rules->philos[i].thread_id),

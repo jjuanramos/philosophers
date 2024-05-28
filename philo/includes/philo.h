@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:55:36 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/23 18:43:55 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/28 15:18:11 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_rules
 	int				dead;
 	int				all_ate;
 	long long		starting_time;
+	long long		last_time_eaten;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	logger;
