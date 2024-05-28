@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 12:18:05 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/27 11:18:35 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/28 18:26:33 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	check_if_dead(t_rules *r, t_philo *p)
 		pthread_mutex_lock(&(r->meal_check));
 		if (time_diff(p[i].last_meal, timestamp()) > r->time_to_die)
 		{
-			print_action(&p[i], "died");
 			r->dead = 1;
+			printf("\033[1;31m%lli %d died\n", timestamp(), p->id);
 			pthread_mutex_unlock(&(r->meal_check));
 			break ;
 		}

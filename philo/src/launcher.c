@@ -6,7 +6,7 @@
 /*   By: juramos <juramos@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:33:48 by juramos           #+#    #+#             */
-/*   Updated: 2024/05/27 11:47:42 by juramos          ###   ########.fr       */
+/*   Updated: 2024/05/28 18:28:59 by juramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	philo_eats(t_philo *phi, t_rules *rules)
 		pthread_mutex_lock(&(rules->forks[phi->lf_id]));
 		print_action(phi, "has taken a fork");
 	}
-	pthread_mutex_lock(&(rules->meal_check));
 	print_action(phi, "is eating");
+	pthread_mutex_lock(&(rules->meal_check));
 	phi->last_meal = timestamp();
 	(phi->n_meals)++;
 	pthread_mutex_unlock(&(rules->meal_check));
@@ -52,7 +52,8 @@ void	*p_thread(void *philo)
 		if (check_condition(&(rules->dead), &(rules->meal_check)))
 			break ;
 		philo_eats(phi, rules);
-		if (check_condition(&(rules->all_ate), &(rules->meal_check)))
+		if (check_condition(&(rules->all_ate), &(rules->meal_check))
+			|| check_condition(&(rules->dead), &(rules->meal_check)))
 			break ;
 		print_action(phi, "is sleeping");
 		philo_sleeps(rules->time_to_sleep);
